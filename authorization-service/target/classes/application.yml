@@ -1,0 +1,22 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: authorization-service
+
+jwt:
+  secret: hospitalManagementSecretKeyForJWTTokenGenerationAndValidation2024
+  expiration: 1800000  # 30 minutes in milliseconds
+
+logging:
+  level:
+    com.hospital: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

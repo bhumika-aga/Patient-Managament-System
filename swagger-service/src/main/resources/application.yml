@@ -1,0 +1,61 @@
+server:
+  port: 8084
+  servlet:
+    context-path: /
+
+spring:
+  application:
+    name: swagger-service
+  profiles:
+    active: local
+  
+# Swagger/OpenAPI Configuration
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    config-url: /v3/api-docs/swagger-config
+    urls-primary-name: "Swagger Service"
+    urls:
+      - name: "Authorization Service"
+        url: "http://localhost:8080/v3/api-docs"
+      - name: "Treatment Offering Service"
+        url: "http://localhost:8081/v3/api-docs"
+      - name: "Treatment Service"
+        url: "http://localhost:8082/v3/api-docs"
+      - name: "Insurance Service"
+        url: "http://localhost:8083/v3/api-docs"
+      - name: "Swagger Service"
+        url: "http://localhost:8084/v3/api-docs"
+  
+# Service URLs Configuration
+services:
+  auth:
+    url: http://localhost:8080
+  treatment:
+    url: http://localhost:8081
+  timetable:
+    url: http://localhost:8082
+  insurance:
+    url: http://localhost:8083
+
+# Management endpoints
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
+
+# Logging
+logging:
+  level:
+    com.hospital.swagger: DEBUG
+    org.springframework.web: INFO
+    org.springframework.security: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"

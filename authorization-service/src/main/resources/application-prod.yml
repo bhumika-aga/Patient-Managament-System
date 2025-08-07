@@ -1,0 +1,40 @@
+server:
+  port: ${PORT:8080}
+  tomcat:
+    threads:
+      max: 50
+      min-spare: 5
+    connection-timeout: 60s
+    keep-alive-timeout: 30s
+
+spring:
+  application:
+    name: mediflow-auth-service
+    
+  datasource:
+    hikari:
+      maximum-pool-size: 5
+      minimum-idle: 1
+      connection-timeout: 20000
+      leak-detection-threshold: 60000
+
+jwt:
+  secret: ${JWT_SECRET:hospitalManagementSecretKeyForJWTTokenGenerationAndValidation2024}
+  expiration: 1800000
+
+logging:
+  level:
+    com.hospital: INFO
+    org.springframework.security: INFO
+    org.springframework.web: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: when-authorized

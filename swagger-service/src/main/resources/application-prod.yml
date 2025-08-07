@@ -1,0 +1,31 @@
+server:
+  port: ${PORT:8084}
+
+services:
+  auth:
+    url: ${AUTH_SERVICE_URL:https://mediflow-auth.render.com}
+  treatment:
+    url: ${TREATMENT_SERVICE_URL:https://mediflow-treatment.render.com}
+  timetable:
+    url: ${TIMETABLE_SERVICE_URL:https://mediflow-timetable.render.com}
+  insurance:
+    url: ${INSURANCE_SERVICE_URL:https://mediflow-insurance.render.com}
+
+springdoc:
+  swagger-ui:
+    urls:
+      - name: "Authorization Service"
+        url: "${services.auth.url}/v3/api-docs"
+      - name: "Treatment Offering Service"
+        url: "${services.treatment.url}/v3/api-docs"
+      - name: "Treatment Service"
+        url: "${services.timetable.url}/v3/api-docs"
+      - name: "Insurance Service"
+        url: "${services.insurance.url}/v3/api-docs"
+      - name: "Swagger Service"
+        url: "${server.servlet.context-path}/v3/api-docs"
+
+logging:
+  level:
+    com.hospital.swagger: INFO
+    org.springframework.web: WARN

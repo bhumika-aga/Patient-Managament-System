@@ -1,0 +1,38 @@
+server:
+  port: ${PORT:8082}
+  tomcat:
+    threads:
+      max: 50
+      min-spare: 5
+
+spring:
+  application:
+    name: mediflow-iptreatment-service
+    
+  datasource:
+    url: jdbc:h2:mem:iptreatment_prod_db
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+    hikari:
+      maximum-pool-size: 5
+      minimum-idle: 1
+      
+  h2:
+    console:
+      enabled: false
+      
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+
+jwt:
+  secret: ${JWT_SECRET:hospitalManagementSecretKeyForJWTTokenGenerationAndValidation2024}
+
+logging:
+  level:
+    com.hospital: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"

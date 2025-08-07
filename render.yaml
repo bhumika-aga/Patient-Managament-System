@@ -1,0 +1,109 @@
+# Render deployment configuration for MediFlow
+# Optimized for free tier deployment
+
+services:
+  # Authorization Service
+  - type: web
+    name: mediflow-auth-service
+    env: java
+    repo: https://github.com/your-username/mediflow
+    rootDir: authorization-service
+    buildCommand: mvn clean package -DskipTests -Dmaven.test.skip=true
+    startCommand: java -Xmx400m -Dserver.port=$PORT -jar target/*.jar
+    envVars:
+      - key: JAVA_TOOL_OPTIONS
+        value: -Xmx400m -XX:MaxRAMPercentage=75
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: JWT_SECRET
+        value: hospitalManagementSecretKeyForJWTTokenGenerationAndValidation2024
+    plan: free
+
+  # IPTreatmentOffering Service
+  - type: web
+    name: mediflow-iptreatment-offering
+    env: java
+    repo: https://github.com/your-username/mediflow
+    rootDir: iptreatment-offering-service
+    buildCommand: mvn clean package -DskipTests -Dmaven.test.skip=true
+    startCommand: java -Xmx400m -Dserver.port=$PORT -jar target/*.jar
+    envVars:
+      - key: JAVA_TOOL_OPTIONS
+        value: -Xmx400m -XX:MaxRAMPercentage=75
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: JWT_SECRET
+        value: hospitalManagementSecretKeyForJWTTokenGenerationAndValidation2024
+    plan: free
+
+  # IPTreatment Service
+  - type: web
+    name: mediflow-iptreatment
+    env: java
+    repo: https://github.com/your-username/mediflow
+    rootDir: iptreatment-service
+    buildCommand: mvn clean package -DskipTests -Dmaven.test.skip=true
+    startCommand: java -Xmx400m -Dserver.port=$PORT -jar target/*.jar
+    envVars:
+      - key: JAVA_TOOL_OPTIONS
+        value: -Xmx400m -XX:MaxRAMPercentage=75
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: JWT_SECRET
+        value: hospitalManagementSecretKeyForJWTTokenGenerationAndValidation2024
+    plan: free
+
+  # InsuranceClaim Service
+  - type: web
+    name: mediflow-insurance-claim
+    env: java
+    repo: https://github.com/your-username/mediflow
+    rootDir: insurance-claim-service
+    buildCommand: mvn clean package -DskipTests -Dmaven.test.skip=true
+    startCommand: java -Xmx400m -Dserver.port=$PORT -jar target/*.jar
+    envVars:
+      - key: JAVA_TOOL_OPTIONS
+        value: -Xmx400m -XX:MaxRAMPercentage=75
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: JWT_SECRET
+        value: hospitalManagementSecretKeyForJWTTokenGenerationAndValidation2024
+    plan: free
+
+  # Swagger Documentation Service
+  - type: web
+    name: mediflow-swagger
+    env: java
+    repo: https://github.com/your-username/mediflow
+    rootDir: swagger-service
+    buildCommand: mvn clean package -DskipTests -Dmaven.test.skip=true
+    startCommand: java -Xmx300m -Dserver.port=$PORT -jar target/*.jar
+    envVars:
+      - key: JAVA_TOOL_OPTIONS
+        value: -Xmx300m -XX:MaxRAMPercentage=75
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+    plan: free
+
+  # React Frontend
+  - type: web
+    name: mediflow-portal
+    env: node
+    repo: https://github.com/your-username/mediflow
+    rootDir: member-portal
+    buildCommand: npm ci && npm run build
+    startCommand: npm run start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: REACT_APP_AUTH_SERVICE_URL
+        value: https://mediflow-auth-service.onrender.com
+      - key: REACT_APP_IPTREATMENT_OFFERING_URL
+        value: https://mediflow-iptreatment-offering.onrender.com
+      - key: REACT_APP_IPTREATMENT_URL
+        value: https://mediflow-iptreatment.onrender.com
+      - key: REACT_APP_INSURANCE_CLAIM_URL
+        value: https://mediflow-insurance-claim.onrender.com
+      - key: REACT_APP_SWAGGER_URL
+        value: https://mediflow-swagger.onrender.com
+    plan: free

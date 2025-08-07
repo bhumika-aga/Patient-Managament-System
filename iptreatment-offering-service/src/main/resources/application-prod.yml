@@ -1,0 +1,60 @@
+server:
+  port: ${PORT:8081}
+  tomcat:
+    threads:
+      max: 50
+      min-spare: 5
+    connection-timeout: 60s
+    keep-alive-timeout: 30s
+
+spring:
+  application:
+    name: mediflow-iptreatment-offering-service
+    
+  datasource:
+    url: jdbc:h2:mem:iptreatment_offering_prod_db
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+    hikari:
+      maximum-pool-size: 5
+      minimum-idle: 1
+      connection-timeout: 20000
+      leak-detection-threshold: 60000
+      
+  h2:
+    console:
+      enabled: false # Disabled in production for security
+      
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+        jdbc:
+          batch_size: 25
+        order_inserts: true
+        order_updates: true
+
+jwt:
+  secret: ${JWT_SECRET:hospitalManagementSecretKeyForJWTTokenGenerationAndValidation2024}
+
+logging:
+  level:
+    com.hospital: INFO
+    org.springframework.security: INFO
+    org.springframework.web: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: when-authorized
