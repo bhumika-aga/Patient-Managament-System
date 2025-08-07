@@ -12,7 +12,7 @@ import java.util.Map;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
-
+    
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<Map<String, Object>> handleRuntimeException(RuntimeException ex, WebRequest request) {
         Map<String, Object> errorDetails = new HashMap<>();
@@ -24,7 +24,7 @@ public class GlobalExceptionHandler {
         
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
-
+    
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<Map<String, Object>> handleIllegalArgumentException(IllegalArgumentException ex, WebRequest request) {
         Map<String, Object> errorDetails = new HashMap<>();
@@ -36,7 +36,7 @@ public class GlobalExceptionHandler {
         
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
-
+    
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, Object>> handleGlobalException(Exception ex, WebRequest request) {
         Map<String, Object> errorDetails = new HashMap<>();

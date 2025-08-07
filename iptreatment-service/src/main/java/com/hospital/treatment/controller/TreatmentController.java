@@ -23,15 +23,15 @@ import java.util.Map;
 @SecurityRequirement(name = "Bearer Authentication")
 @Tag(name = "Treatment Management", description = "International Patient Treatment Timetable and Management")
 public class TreatmentController {
-
+    
     @Autowired
     private TreatmentTimetableService treatmentService;
-
+    
     @PostMapping("/FormulateTreatmentTimetable")
     @Operation(
-        summary = "Formulate Treatment Timetable", 
+        summary = "Formulate Treatment Timetable",
         description = "Generate a comprehensive treatment timetable for a patient based on their ailment and chosen package. " +
-                     "Automatically assigns appropriate specialist (Package 1→Junior, Package 2→Senior) and creates treatment plan."
+                          "Automatically assigns appropriate specialist (Package 1→Junior, Package 2→Senior) and creates treatment plan."
     )
     @ApiResponses(value = {
         @ApiResponse(responseCode = "201", description = "Treatment timetable created successfully"),
@@ -40,16 +40,16 @@ public class TreatmentController {
         @ApiResponse(responseCode = "404", description = "Package not found or specialist unavailable")
     })
     public ResponseEntity<TreatmentPlanResponse> formulateTreatmentTimetable(
-            @Parameter(description = "Patient details including name, age, ailment, package choice, and treatment start date", required = true)
-            @RequestBody PatientDetailRequest patientDetail) {
+        @Parameter(description = "Patient details including name, age, ailment, package choice, and treatment start date", required = true)
+        @RequestBody PatientDetailRequest patientDetail) {
         
         TreatmentPlanResponse treatmentPlan = treatmentService.formulateTreatmentTimetable(patientDetail);
         return new ResponseEntity<>(treatmentPlan, HttpStatus.CREATED);
     }
-
+    
     @GetMapping("/patients")
     @Operation(
-        summary = "Get All Patients", 
+        summary = "Get All Patients",
         description = "Retrieve list of all registered patients with their treatment status"
     )
     @ApiResponses(value = {
@@ -60,10 +60,10 @@ public class TreatmentController {
         List<PatientDetail> patients = treatmentService.getPatientsByStatus("IN_PROGRESS");
         return ResponseEntity.ok(patients);
     }
-
+    
     @GetMapping("/patients/status/{status}")
     @Operation(
-        summary = "Get Patients by Status", 
+        summary = "Get Patients by Status",
         description = "Retrieve patients filtered by treatment status (IN_PROGRESS, COMPLETED, CANCELLED)"
     )
     @ApiResponses(value = {
@@ -71,15 +71,15 @@ public class TreatmentController {
         @ApiResponse(responseCode = "401", description = "Unauthorized - JWT token required")
     })
     public ResponseEntity<List<PatientDetail>> getPatientsByStatus(
-            @Parameter(description = "Treatment status (IN_PROGRESS, COMPLETED, CANCELLED)", required = true)
-            @PathVariable String status) {
+        @Parameter(description = "Treatment status (IN_PROGRESS, COMPLETED, CANCELLED)", required = true)
+        @PathVariable String status) {
         List<PatientDetail> patients = treatmentService.getPatientsByStatus(status.toUpperCase());
         return ResponseEntity.ok(patients);
     }
-
+    
     @GetMapping("/treatment-plan/{patientId}")
     @Operation(
-        summary = "Get Treatment Plan by Patient ID", 
+        summary = "Get Treatment Plan by Patient ID",
         description = "Retrieve detailed treatment plan for a specific patient including specialist assignment and schedule"
     )
     @ApiResponses(value = {
@@ -88,15 +88,15 @@ public class TreatmentController {
         @ApiResponse(responseCode = "404", description = "Patient or treatment plan not found")
     })
     public ResponseEntity<TreatmentPlanResponse> getTreatmentPlan(
-            @Parameter(description = "Patient ID", required = true)
-            @PathVariable Long patientId) {
+        @Parameter(description = "Patient ID", required = true)
+        @PathVariable Long patientId) {
         TreatmentPlanResponse treatmentPlan = treatmentService.getTreatmentPlan(patientId);
         return ResponseEntity.ok(treatmentPlan);
     }
-
+    
     @PutMapping("/patients/{patientId}/status")
     @Operation(
-        summary = "Update Treatment Status", 
+        summary = "Update Treatment Status",
         description = "Update the treatment status of a patient (e.g., mark as COMPLETED for insurance claim processing)"
     )
     @ApiResponses(value = {
@@ -105,10 +105,10 @@ public class TreatmentController {
         @ApiResponse(responseCode = "404", description = "Patient not found")
     })
     public ResponseEntity<Map<String, String>> updateTreatmentStatus(
-            @Parameter(description = "Patient ID", required = true)
-            @PathVariable Long patientId,
-            @Parameter(description = "New treatment status", required = true)
-            @RequestParam String status) {
+        @Parameter(description = "Patient ID", required = true)
+        @PathVariable Long patientId,
+        @Parameter(description = "New treatment status", required = true)
+        @RequestParam String status) {
         
         treatmentService.updateTreatmentStatus(patientId, status.toUpperCase());
         return ResponseEntity.ok(Map.of(
@@ -118,10 +118,10 @@ public class TreatmentController {
             "status", "success"
         ));
     }
-
+    
     @GetMapping("/packages/info")
     @Operation(
-        summary = "Get Package Information", 
+        summary = "Get Package Information",
         description = "Retrieve information about available treatment packages for reference"
     )
     @ApiResponses(value = {
@@ -141,7 +141,7 @@ public class TreatmentController {
                 ),
                 Map.of(
                     "name", "Orthopaedics Package 2",
-                    "specialization", "Orthopaedics", 
+                    "specialization", "Orthopaedics",
                     "tests", List.of("OPT3", "OPT4"),
                     "cost", 3000,
                     "durationWeeks", 6,
@@ -171,7 +171,7 @@ public class TreatmentController {
         );
         return ResponseEntity.ok(packageInfo);
     }
-
+    
     @GetMapping("/health")
     @Operation(summary = "Health Check", description = "Check if the IPTreatment service is running")
     public ResponseEntity<Map<String, String>> health() {

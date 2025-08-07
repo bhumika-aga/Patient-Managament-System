@@ -10,8 +10,12 @@ import java.util.Optional;
 @Repository
 public interface ClaimRequestRepository extends JpaRepository<ClaimRequest, Long> {
     List<ClaimRequest> findByPatientName(String patientName);
+    
     List<ClaimRequest> findByClaimStatus(String claimStatus);
+    
     Optional<ClaimRequest> findByPatientId(Long patientId);
+    
     List<ClaimRequest> findByInsurerName(String insurerName);
+    
     Optional<ClaimRequest> findByClaimReferenceNumber(String claimReferenceNumber);
 }

@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AuthService {
-
+    
     @Autowired
     private JwtUtil jwtUtil;
-
+    
     public TokenResponse generateToken(TokenRequest request) {
         String username = request.getUsername() != null ? request.getUsername() : "anonymous";
         String token = jwtUtil.generateToken(username);
@@ -22,7 +22,7 @@ public class AuthService {
             jwtUtil.getExpirationTime() / 1000  // Convert to seconds
         );
     }
-
+    
     public boolean validateToken(String token) {
         try {
             String username = jwtUtil.extractUsername(token);

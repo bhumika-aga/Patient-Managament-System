@@ -8,7 +8,7 @@ server:
 spring:
   application:
     name: mediflow-iptreatment-service
-    
+  
   datasource:
     url: jdbc:h2:mem:iptreatment_prod_db
     driver-class-name: org.h2.Driver
@@ -17,11 +17,11 @@ spring:
     hikari:
       maximum-pool-size: 5
       minimum-idle: 1
-      
+  
   h2:
     console:
       enabled: false
-      
+  
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:

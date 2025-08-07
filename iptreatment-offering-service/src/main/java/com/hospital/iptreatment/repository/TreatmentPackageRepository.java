@@ -10,6 +10,8 @@ import java.util.Optional;
 @Repository
 public interface TreatmentPackageRepository extends JpaRepository<TreatmentPackage, Long> {
     List<TreatmentPackage> findBySpecialization(String specialization);
+    
     Optional<TreatmentPackage> findByName(String name);
+    
     List<TreatmentPackage> findByPackageLevel(Integer packageLevel);
 }

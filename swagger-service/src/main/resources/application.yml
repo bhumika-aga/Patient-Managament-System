@@ -8,7 +8,7 @@ spring:
     name: swagger-service
   profiles:
     active: local
-  
+
 # Swagger/OpenAPI Configuration
 springdoc:
   api-docs:
@@ -28,7 +28,7 @@ springdoc:
         url: "http://localhost:8083/v3/api-docs"
       - name: "Swagger Service"
         url: "http://localhost:8084/v3/api-docs"
-  
+
 # Service URLs Configuration
 services:
   auth:

@@ -19,10 +19,10 @@ import java.util.List;
 @SecurityRequirement(name = "Bearer Authentication")
 @Tag(name = "Treatment Packages", description = "International Patient Treatment Packages Management")
 public class TreatmentPackageController {
-
+    
     @Autowired
     private TreatmentPackageService packageService;
-
+    
     @GetMapping("/IPTreatmentPackages")
     @Operation(summary = "Get All Treatment Packages", description = "Retrieve list of all international patient treatment packages")
     @ApiResponses(value = {
@@ -33,7 +33,7 @@ public class TreatmentPackageController {
         List<TreatmentPackageDTO> packages = packageService.getAllPackages();
         return ResponseEntity.ok(packages);
     }
-
+    
     @GetMapping("/IPTreatmentPackageByName")
     @Operation(summary = "Get Treatment Package by Name", description = "Retrieve a specific treatment package by its name")
     @ApiResponses(value = {
@@ -42,12 +42,12 @@ public class TreatmentPackageController {
         @ApiResponse(responseCode = "401", description = "Unauthorized - JWT token required")
     })
     public ResponseEntity<TreatmentPackageDTO> getPackageByName(
-            @Parameter(description = "Name of the treatment package", required = true)
-            @RequestParam String packageName) {
+        @Parameter(description = "Name of the treatment package", required = true)
+        @RequestParam String packageName) {
         TreatmentPackageDTO packageDTO = packageService.getPackageByName(packageName);
         return ResponseEntity.ok(packageDTO);
     }
-
+    
     @GetMapping("/IPTreatmentPackages/specialization/{specialization}")
     @Operation(summary = "Get Packages by Specialization", description = "Retrieve treatment packages for a specific medical specialization")
     @ApiResponses(value = {
@@ -55,12 +55,12 @@ public class TreatmentPackageController {
         @ApiResponse(responseCode = "401", description = "Unauthorized - JWT token required")
     })
     public ResponseEntity<List<TreatmentPackageDTO>> getPackagesBySpecialization(
-            @Parameter(description = "Medical specialization (e.g., Orthopaedics, Urology)", required = true)
-            @PathVariable String specialization) {
+        @Parameter(description = "Medical specialization (e.g., Orthopaedics, Urology)", required = true)
+        @PathVariable String specialization) {
         List<TreatmentPackageDTO> packages = packageService.getPackagesBySpecialization(specialization);
         return ResponseEntity.ok(packages);
     }
-
+    
     @PutMapping("/updatePackage/{packageId}")
     @Operation(summary = "Update Treatment Package", description = "Update details of an existing treatment package")
     @ApiResponses(value = {
@@ -69,10 +69,10 @@ public class TreatmentPackageController {
         @ApiResponse(responseCode = "401", description = "Unauthorized - JWT token required")
     })
     public ResponseEntity<TreatmentPackageDTO> updatePackage(
-            @Parameter(description = "ID of the package to update", required = true)
-            @PathVariable Long packageId,
-            @Parameter(description = "Updated package details", required = true)
-            @RequestBody TreatmentPackageDTO packageDTO) {
+        @Parameter(description = "ID of the package to update", required = true)
+        @PathVariable Long packageId,
+        @Parameter(description = "Updated package details", required = true)
+        @RequestBody TreatmentPackageDTO packageDTO) {
         TreatmentPackageDTO updatedPackage = packageService.updatePackage(packageId, packageDTO);
         return ResponseEntity.ok(updatedPackage);
     }

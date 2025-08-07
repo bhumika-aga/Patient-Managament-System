@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*")
 @Tag(name = "Authorization", description = "JWT Token Management APIs")
 public class AuthController {
-
+    
     @Autowired
     private AuthService authService;
-
+    
     @PostMapping("/generate-token")
     @Operation(summary = "Generate JWT Token", description = "Generate a JWT token for authentication (anonymous access allowed)")
     @ApiResponses(value = {
@@ -33,14 +33,14 @@ public class AuthController {
         TokenResponse response = authService.generateToken(request);
         return ResponseEntity.ok(response);
     }
-
+    
     @GetMapping("/validate")
     @Operation(summary = "Validate JWT Token", description = "Validate if a JWT token is valid and not expired")
     public ResponseEntity<Boolean> validateToken(@RequestParam String token) {
         boolean isValid = authService.validateToken(token);
         return ResponseEntity.ok(isValid);
     }
-
+    
     @GetMapping("/health")
     @Operation(summary = "Health Check", description = "Check if the authorization service is running")
     public ResponseEntity<String> health() {

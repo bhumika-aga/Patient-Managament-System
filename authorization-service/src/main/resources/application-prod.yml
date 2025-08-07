@@ -10,7 +10,7 @@ server:
 spring:
   application:
     name: mediflow-auth-service
-    
+  
   datasource:
     hikari:
       maximum-pool-size: 5

@@ -24,13 +24,13 @@ import java.util.Map;
 @SecurityRequirement(name = "Bearer Authentication")
 @Tag(name = "Insurance Claims", description = "Insurance Claim Processing and Insurer Management")
 public class InsuranceController {
-
+    
     @Autowired
     private InsuranceClaimService claimService;
-
+    
     @GetMapping("/GetAllInsurerDetail")
     @Operation(
-        summary = "Get All Insurer Details", 
+        summary = "Get All Insurer Details",
         description = "Retrieve comprehensive list of all active insurance providers with their coverage details, limits, and contact information"
     )
     @ApiResponses(value = {
@@ -41,10 +41,10 @@ public class InsuranceController {
         List<InsurerDTO> insurers = claimService.getAllInsurerDetails();
         return ResponseEntity.ok(insurers);
     }
-
+    
     @GetMapping("/GetInsurerByPackageName")
     @Operation(
-        summary = "Get Insurer by Package Name", 
+        summary = "Get Insurer by Package Name",
         description = "Retrieve insurer details for a specific medical package/specialization"
     )
     @ApiResponses(value = {
@@ -53,17 +53,17 @@ public class InsuranceController {
         @ApiResponse(responseCode = "401", description = "Unauthorized - JWT token required")
     })
     public ResponseEntity<InsurerDTO> getInsurerByPackageName(
-            @Parameter(description = "Treatment package name (e.g., Orthopaedics, Urology)", required = true)
-            @RequestParam String packageName) {
+        @Parameter(description = "Treatment package name (e.g., Orthopaedics, Urology)", required = true)
+        @RequestParam String packageName) {
         InsurerDTO insurer = claimService.getInsurerByPackageName(packageName);
         return ResponseEntity.ok(insurer);
     }
-
+    
     @PostMapping("/InitiateClaim")
     @Operation(
-        summary = "Initiate Insurance Claim", 
+        summary = "Initiate Insurance Claim",
         description = "Process insurance claim initiation for a patient's completed treatment. " +
-                     "Calculates insurance coverage, balance amount to be paid by patient, and generates claim reference number."
+                          "Calculates insurance coverage, balance amount to be paid by patient, and generates claim reference number."
     )
     @ApiResponses(value = {
         @ApiResponse(responseCode = "201", description = "Insurance claim initiated successfully"),
@@ -72,16 +72,16 @@ public class InsuranceController {
         @ApiResponse(responseCode = "401", description = "Unauthorized - JWT token required")
     })
     public ResponseEntity<ClaimInitiationResponse> initiateClaim(
-            @Parameter(description = "Claim initiation request with patient and treatment details", required = true)
-            @RequestBody ClaimInitiationRequest claimRequest) {
+        @Parameter(description = "Claim initiation request with patient and treatment details", required = true)
+        @RequestBody ClaimInitiationRequest claimRequest) {
         
         ClaimInitiationResponse response = claimService.initiateClaim(claimRequest);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
-
+    
     @GetMapping("/claims")
     @Operation(
-        summary = "Get All Claims", 
+        summary = "Get All Claims",
         description = "Retrieve list of all insurance claim requests in the system"
     )
     @ApiResponses(value = {
@@ -92,10 +92,10 @@ public class InsuranceController {
         List<ClaimRequest> claims = claimService.getClaimsByStatus("INITIATED");
         return ResponseEntity.ok(claims);
     }
-
+    
     @GetMapping("/claims/status/{status}")
     @Operation(
-        summary = "Get Claims by Status", 
+        summary = "Get Claims by Status",
         description = "Retrieve insurance claims filtered by their processing status"
     )
     @ApiResponses(value = {
@@ -103,15 +103,15 @@ public class InsuranceController {
         @ApiResponse(responseCode = "401", description = "Unauthorized - JWT token required")
     })
     public ResponseEntity<List<ClaimRequest>> getClaimsByStatus(
-            @Parameter(description = "Claim status (INITIATED, PROCESSING, APPROVED, REJECTED, DISBURSED)", required = true)
-            @PathVariable String status) {
+        @Parameter(description = "Claim status (INITIATED, PROCESSING, APPROVED, REJECTED, DISBURSED)", required = true)
+        @PathVariable String status) {
         List<ClaimRequest> claims = claimService.getClaimsByStatus(status);
         return ResponseEntity.ok(claims);
     }
-
+    
     @GetMapping("/claims/patient/{patientId}")
     @Operation(
-        summary = "Get Claim by Patient ID", 
+        summary = "Get Claim by Patient ID",
         description = "Retrieve insurance claim details for a specific patient"
     )
     @ApiResponses(value = {
@@ -120,15 +120,15 @@ public class InsuranceController {
         @ApiResponse(responseCode = "401", description = "Unauthorized - JWT token required")
     })
     public ResponseEntity<ClaimRequest> getClaimByPatientId(
-            @Parameter(description = "Patient ID", required = true)
-            @PathVariable Long patientId) {
+        @Parameter(description = "Patient ID", required = true)
+        @PathVariable Long patientId) {
         ClaimRequest claim = claimService.getClaimByPatientId(patientId);
         return ResponseEntity.ok(claim);
     }
-
+    
     @GetMapping("/claims/reference/{referenceNumber}")
     @Operation(
-        summary = "Get Claim by Reference Number", 
+        summary = "Get Claim by Reference Number",
         description = "Retrieve insurance claim details using claim reference number"
     )
     @ApiResponses(value = {
@@ -137,15 +137,15 @@ public class InsuranceController {
         @ApiResponse(responseCode = "401", description = "Unauthorized - JWT token required")
     })
     public ResponseEntity<ClaimRequest> getClaimByReferenceNumber(
-            @Parameter(description = "Claim reference number", required = true)
-            @PathVariable String referenceNumber) {
+        @Parameter(description = "Claim reference number", required = true)
+        @PathVariable String referenceNumber) {
         ClaimRequest claim = claimService.getClaimByReferenceNumber(referenceNumber);
         return ResponseEntity.ok(claim);
     }
-
+    
     @PutMapping("/claims/{claimId}/status")
     @Operation(
-        summary = "Update Claim Status", 
+        summary = "Update Claim Status",
         description = "Update the processing status of an insurance claim"
     )
     @ApiResponses(value = {
@@ -154,18 +154,18 @@ public class InsuranceController {
         @ApiResponse(responseCode = "401", description = "Unauthorized - JWT token required")
     })
     public ResponseEntity<ClaimRequest> updateClaimStatus(
-            @Parameter(description = "Claim ID", required = true)
-            @PathVariable Long claimId,
-            @Parameter(description = "New claim status", required = true)
-            @RequestParam String status) {
+        @Parameter(description = "Claim ID", required = true)
+        @PathVariable Long claimId,
+        @Parameter(description = "New claim status", required = true)
+        @RequestParam String status) {
         
         ClaimRequest updatedClaim = claimService.updateClaimStatus(claimId, status);
         return ResponseEntity.ok(updatedClaim);
     }
-
+    
     @GetMapping("/insurance-info")
     @Operation(
-        summary = "Get Insurance Information", 
+        summary = "Get Insurance Information",
         description = "Retrieve general information about insurance coverage and claim processing"
     )
     @ApiResponses(value = {
@@ -190,7 +190,7 @@ public class InsuranceController {
         );
         return ResponseEntity.ok(insuranceInfo);
     }
-
+    
     @GetMapping("/health")
     @Operation(summary = "Health Check", description = "Check if the InsuranceClaim service is running")
     public ResponseEntity<Map<String, String>> health() {

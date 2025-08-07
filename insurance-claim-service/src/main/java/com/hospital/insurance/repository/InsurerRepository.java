@@ -10,7 +10,10 @@ import java.util.Optional;
 @Repository
 public interface InsurerRepository extends JpaRepository<Insurer, Long> {
     List<Insurer> findByPackageName(String packageName);
+    
     Optional<Insurer> findByInsurerName(String insurerName);
+    
     List<Insurer> findByActive(Boolean active);
+    
     List<Insurer> findByInsuranceAmountLimitGreaterThanEqual(Double amount);
 }

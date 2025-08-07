@@ -1,0 +1,3 @@
+com/hospital/swagger/SwaggerServiceApplication.class
+com/hospital/swagger/config/SwaggerConfig.class
+com/hospital/swagger/controller/ApiDocumentationController.class

@@ -10,7 +10,7 @@ server:
 spring:
   application:
     name: mediflow-iptreatment-offering-service
-    
+  
   datasource:
     url: jdbc:h2:mem:iptreatment_offering_prod_db
     driver-class-name: org.h2.Driver
@@ -21,11 +21,11 @@ spring:
       minimum-idle: 1
       connection-timeout: 20000
       leak-detection-threshold: 60000
-      
+  
   h2:
     console:
       enabled: false # Disabled in production for security
-      
+  
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:

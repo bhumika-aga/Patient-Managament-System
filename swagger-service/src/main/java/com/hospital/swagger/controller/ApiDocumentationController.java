@@ -17,19 +17,19 @@ import java.util.Map;
 @RequestMapping("/api")
 @Tag(name = "API Documentation", description = "Service endpoints for API documentation aggregation")
 public class ApiDocumentationController {
-
+    
     @Value("${services.auth.url:http://localhost:8080}")
     private String authServiceUrl;
-
+    
     @Value("${services.treatment.url:http://localhost:8081}")
     private String treatmentServiceUrl;
-
+    
     @Value("${services.timetable.url:http://localhost:8082}")
     private String timetableServiceUrl;
-
+    
     @Value("${services.insurance.url:http://localhost:8083}")
     private String insuranceServiceUrl;
-
+    
     @Operation(
         summary = "Get all service endpoints",
         description = "Returns a list of all microservice endpoints with their documentation URLs"
@@ -80,7 +80,7 @@ public class ApiDocumentationController {
         
         return ResponseEntity.ok(services);
     }
-
+    
     @Operation(
         summary = "Get service health status",
         description = "Returns the health status of the documentation aggregation service"
@@ -96,7 +96,7 @@ public class ApiDocumentationController {
         health.put("timestamp", java.time.Instant.now().toString());
         return ResponseEntity.ok(health);
     }
-
+    
     @Operation(
         summary = "Get service information",
         description = "Returns basic information about the MediFlow system"

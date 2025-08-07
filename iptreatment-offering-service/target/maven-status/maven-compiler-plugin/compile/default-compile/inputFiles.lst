@@ -1,0 +1,16 @@
+/Users/bhumikaagarwal/Personal/Workspace/PatientManagementSystem/hospital-management-system/iptreatment-offering-service/src/main/java/com/hospital/iptreatment/IPTreatmentOfferingApplication.java
+/Users/bhumikaagarwal/Personal/Workspace/PatientManagementSystem/hospital-management-system/iptreatment-offering-service/src/main/java/com/hospital/iptreatment/config/DataInitializer.java
+/Users/bhumikaagarwal/Personal/Workspace/PatientManagementSystem/hospital-management-system/iptreatment-offering-service/src/main/java/com/hospital/iptreatment/config/GlobalExceptionHandler.java
+/Users/bhumikaagarwal/Personal/Workspace/PatientManagementSystem/hospital-management-system/iptreatment-offering-service/src/main/java/com/hospital/iptreatment/config/SecurityConfig.java
+/Users/bhumikaagarwal/Personal/Workspace/PatientManagementSystem/hospital-management-system/iptreatment-offering-service/src/main/java/com/hospital/iptreatment/controller/SpecialistController.java
+/Users/bhumikaagarwal/Personal/Workspace/PatientManagementSystem/hospital-management-system/iptreatment-offering-service/src/main/java/com/hospital/iptreatment/controller/TreatmentPackageController.java
+/Users/bhumikaagarwal/Personal/Workspace/PatientManagementSystem/hospital-management-system/iptreatment-offering-service/src/main/java/com/hospital/iptreatment/dto/SpecialistDTO.java
+/Users/bhumikaagarwal/Personal/Workspace/PatientManagementSystem/hospital-management-system/iptreatment-offering-service/src/main/java/com/hospital/iptreatment/dto/TreatmentPackageDTO.java
+/Users/bhumikaagarwal/Personal/Workspace/PatientManagementSystem/hospital-management-system/iptreatment-offering-service/src/main/java/com/hospital/iptreatment/entity/Specialist.java
+/Users/bhumikaagarwal/Personal/Workspace/PatientManagementSystem/hospital-management-system/iptreatment-offering-service/src/main/java/com/hospital/iptreatment/entity/TreatmentPackage.java
+/Users/bhumikaagarwal/Personal/Workspace/PatientManagementSystem/hospital-management-system/iptreatment-offering-service/src/main/java/com/hospital/iptreatment/repository/SpecialistRepository.java
+/Users/bhumikaagarwal/Personal/Workspace/PatientManagementSystem/hospital-management-system/iptreatment-offering-service/src/main/java/com/hospital/iptreatment/repository/TreatmentPackageRepository.java
+/Users/bhumikaagarwal/Personal/Workspace/PatientManagementSystem/hospital-management-system/iptreatment-offering-service/src/main/java/com/hospital/iptreatment/security/JwtAuthenticationFilter.java
+/Users/bhumikaagarwal/Personal/Workspace/PatientManagementSystem/hospital-management-system/iptreatment-offering-service/src/main/java/com/hospital/iptreatment/security/JwtUtil.java
+/Users/bhumikaagarwal/Personal/Workspace/PatientManagementSystem/hospital-management-system/iptreatment-offering-service/src/main/java/com/hospital/iptreatment/service/SpecialistService.java
+/Users/bhumikaagarwal/Personal/Workspace/PatientManagementSystem/hospital-management-system/iptreatment-offering-service/src/main/java/com/hospital/iptreatment/service/TreatmentPackageService.java
